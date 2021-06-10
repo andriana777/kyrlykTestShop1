@@ -61,6 +61,7 @@ class ProductController extends Controller
         $id = filter_input(INPUT_GET, 'id');
         if (isset($id) && !empty($_POST)) {
             $values = $model->getPostValues();
+            $values  = $model->myValidator($values);
             $this->set('saved', 1);
             $model->saveItem($id, $values);
            
