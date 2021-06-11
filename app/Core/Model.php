@@ -262,7 +262,11 @@ class Model implements DbModelInterface
         
     }
     
-   
+   public function getLast() {
+       $db = new DB();
+       $result = $db->getConnection()->lastInsertId();
+       return $result;
+   }
     
     
     

@@ -84,8 +84,9 @@ class ProductController extends Controller
             $model->addItem($values);
             
             //$lastId = $this->lastId();
-          // $road= "/product/edit?id=$lastId";
-            $road = "/product/success";
+            $lastId = $model->getLast();
+          $road= "/product/edit?id={$lastId}";
+          //$road = "/product/success";
             self::redirect($road);
            // echo "Товар додано!";
         }
