@@ -28,7 +28,7 @@ foreach($products as $product)  :
         <h4><?php echo $product['name']?><h4>
         <p> Ціна: <span class="price"><?php echo $product['price']?></span> грн</p>
         <p> Кількість: <?php echo $product['qty']?></p>
-        <p> Опис товару: <?php echo $product['description']?></p>
+        <p> Опис товару: <?php echo htmlspecialchars_decode($product['description'])?></p>
         <p><?php if(!$product['qty'] > 0) { echo 'Нема в наявності'; } ?></p>
         <p>
             <?= \Core\Url::getLink('/product/edit', 'Редагувати', array('id'=>$product['id'])); ?>
