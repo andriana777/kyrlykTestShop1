@@ -24,7 +24,7 @@ class ProductController extends Controller
 
         $products = $this->getModel('Product')
             ->initCollection()
-            ->filter()
+            ->filterPrice()
             ->sort($this->getSortParams())
             ->getCollection()
             ->select();
@@ -83,12 +83,11 @@ class ProductController extends Controller
             $values  = $model->myValidator($values);
             $model->addItem($values);
             
-            //$lastId = $this->lastId();
             $lastId = $model->getLast();
           $road= "/product/edit?id={$lastId}";
           //$road = "/product/success";
             self::redirect($road);
-           // echo "Товар додано!";
+           echo "Товар додано!";
         }
         $this->renderLayout();
     }
@@ -176,7 +175,8 @@ class ProductController extends Controller
         $id = filter_input(INPUT_GET, 'id');
         if (isset($id) && isset($_POST['submit'])) {
             $this->set('deleted', 1);
-            $model->deleteItem($model->getItem($this->getId()));
+           // $model->deleteItem();
+            $model->deleteItem($id);
            // self::redirect('/product/list');
         }
         

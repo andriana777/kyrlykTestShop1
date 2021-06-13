@@ -68,9 +68,5 @@ class DB
 
         $statement->execute($model->getId());
     }
-    public function lastInsId() {
-       
-       $lastId= $pdo::lastInsertId();
-       return $lastId;
-    }
+   
 }

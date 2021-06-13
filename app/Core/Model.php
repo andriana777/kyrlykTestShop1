@@ -78,7 +78,7 @@ class Model implements DbModelInterface
     /**
      * @param $params
      */
-    public function filter()
+    public function filterPrice()
     {
         $parameters ='';
     // $key = array_keys($params)[0];
@@ -237,7 +237,8 @@ class Model implements DbModelInterface
     {
         $db = new DB;
        //if(isset($_POST['submit'])){
-        $db->deleteEntity($id);
+        $db->deleteEntity($this);
+       return $this;
       
    // }
     
