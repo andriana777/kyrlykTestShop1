@@ -37,6 +37,16 @@ class Helper {
         $model = new $name();
         return $model;
     }
+    
+    public static function isAdmin()
+    {
+       $customer =  self::getCustomer();
+       if(isset($customer) && ($customer['admin_role']===1)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     }
     
 

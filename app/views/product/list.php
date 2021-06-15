@@ -11,11 +11,11 @@
 <input type="submit" value="Застосувати" style="margin-left: 370px; margin-top: 10px">
 </form>
 
-
+<?php if (\Core\Helper::isAdmin()===true) { ?>
 <div class="product"><p>
         <?= \Core\Url::getLink('/product/add', 'Додати товар'); ?>
 </p></div>
-
+<?php }; ?>
 <?php
 
 $products =  $this->get('products');
@@ -30,10 +30,11 @@ foreach($products as $product)  :
         <p> Кількість: <?php echo $product['qty']?></p>
         <p> Опис товару: <?php echo htmlspecialchars_decode($product['description'])?></p>
         <p><?php if(!$product['qty'] > 0) { echo 'Нема в наявності'; } ?></p>
+        <?php if (\Core\Helper::isAdmin()===true) { ?>
         <p>
             <?= \Core\Url::getLink('/product/edit', 'Редагувати', array('id'=>$product['id'])); ?>
             <?= \Core\Url::getLink('/product/delete', 'Видалити', array('id'=>$product['id'])); ?>
-        </p>
+        </p><?php }; ?>
     </div>
 <?php endforeach; ?>
 
