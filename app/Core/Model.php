@@ -36,7 +36,7 @@ class Model implements DbModelInterface
      */
     public function initCollection()
     {
-        $columns = implode(',',$this->getColumns());
+        $columns = implode(', ',$this->getColumns());
         $this->sql = "select $columns from " . $this->table_name ;
         return $this;
     }
@@ -100,16 +100,22 @@ class Model implements DbModelInterface
       // array_push($this->parameters, $to);
        return $this;
     
-       /*
-              TODO
-              return $this;
-        */
-        
+     
     }
 
-    /**
-     * @return $this
-     */
+   public function filter($params)
+   {    
+       //$this->sql = "SELECT * FROM customer WHERE ";
+       $this->sql .= " WHERE ";
+       foreach($params as $k=>$v) {
+          $this->sql.= "{$k} = ? AND ";
+          // $this->sql.= "$k = '$v' AND ";
+       }
+       $this->sql = mb_substr($this->sql,0, -4);
+     
+       $this->params = array_values($params);
+       return $this;
+   }
     
     public function getMaxPrice() 
     {
@@ -237,8 +243,8 @@ class Model implements DbModelInterface
     {
         $db = new DB;
        //if(isset($_POST['submit'])){
-        $db->deleteEntity($this);
-       return $this;
+        $db->deleteEntity('product');
+      // return $this;
       
    // }
     
@@ -269,6 +275,17 @@ class Model implements DbModelInterface
        return $result;
    }
     
-    
+     public function getProductId()
+    {
+        
+        if (isset($_GET['id'])) {
+         
+            return $_GET['id'];
+        } else {
+            return NULL;
+        }
+        
+        return filter_input(INPUT_GET, 'id');
+    }
     
 }

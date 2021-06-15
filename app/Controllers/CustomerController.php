@@ -13,32 +13,45 @@ use Core\View;
 
 class CustomerController extends Controller {
     
-    public function LoginAction()
-    {
+    public function loginAction()
+    {   $_SESSION = [];
         $this->set('title', "Вхід");
         if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST')
         {
             $email = filter_input(INPUT_POST, 'email');
-            $password = md5(filter_input(INPUT_POST, 'password'));
+            //$password = md5(filter_input(INPUT_POST, 'password'));
+            $password = (filter_input(INPUT_POST, 'password'));
             $params =array (
                 'email' => $email,
                 'password' => $password
             );
+           // $_SESSION =[];
             $customer = $this->getModel('customer')->initCollection()
                 ->filter($params)
                 ->getCollection()
                 ->selectFirst();
+             // $this->set('customer', $customer);
+          
+     
+            //if(isset($customer)) {
             if(!empty($customer)) {
+                
                 $_SESSION['id'] = $customer['customer_id'];
-                $this->redirect('/index/index');
+                self::redirect('/index/index');
+               // $this->redirect('/index/index');
+                  var_dump($customer);
+                  echo $_SESSION['id'];
             } else {
+                var_dump(session_status());
+                //var_dump(session_id());
+                echo "Щось пішло не так...";
                 $this->invalid_password = 1;
             }
         }
         $this->renderLayout();
     }
 
-    public function LogoutAction()
+    public function logoutAction()
     {
 
         $_SESSION = [];

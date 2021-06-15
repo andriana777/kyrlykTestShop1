@@ -172,12 +172,13 @@ class ProductController extends Controller
         $model = $this->getModel('Product');
         $this->set('deleted', 0);
         $this->set("title", "Видалення товару");
+       // $id = filter_input(INPUT_GET, 'id');
         $id = filter_input(INPUT_GET, 'id');
         if (isset($id) && isset($_POST['submit'])) {
             $this->set('deleted', 1);
            // $model->deleteItem();
-            $model->deleteItem($id);
-           // self::redirect('/product/list');
+            $model->deleteItem($this->id);
+           self::redirect('/product/list');
         }
         
         $this->renderLayout();

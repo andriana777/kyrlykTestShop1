@@ -1,9 +1,9 @@
 <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>">
     <p>Заповніть, будь-ласка, форму</p>
     <h5>Ім'я</h5>
-       <div> <input type="text" name="firstname"></div><br>
+       <div> <input type="text" name="first_name"></div><br>
     <h5>Прізвище</h5>
-       <div><input type="text" name="lastname"></div><br>
+       <div><input type="text" name="last_name"></div><br>
     <h5>Телефон</h5>
        <div><input type="tel" name="telephone"></div><br>
     <h5>Електронна пошта</h5>

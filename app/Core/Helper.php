@@ -8,12 +8,9 @@
 
 namespace Core;
 
-/**
- * Description of Helper
- *
- * @author andri
- */
+
 class Helper {
+    
      public static function getCustomer()
    {
         if (!empty($_SESSION['id'])) {
@@ -26,4 +23,20 @@ class Helper {
         }
 
     }
-}
+    
+    public static function getCustomerName()
+    {
+        $customer = self::getCustomer();
+        return isset($customer) ? $customer['first_name']. " " . $customer['last_name'] : 
+            "Friend";
+            
+        }
+     public static function getModel($name)
+    {
+        $name = '\\Models\\' . ucfirst($name);
+        $model = new $name();
+        return $model;
+    }
+    }
+    
+

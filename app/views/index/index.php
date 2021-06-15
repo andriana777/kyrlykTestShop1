@@ -1,4 +1,6 @@
-<h3>Hello, unauthorized user!</h3>
-<?php echo "hello"; ?>
+<h3>Hello, <?= \Core\Helper::getCustomerName(); ?>!</h3>
+<?php 
+echo "<br>";
+var_dump($_SESSION);
 
 

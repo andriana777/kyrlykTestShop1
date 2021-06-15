@@ -65,8 +65,8 @@ class DB
             $model->getPrimaryKeyName()
         );
         $statement = $dbh->prepare($sql);
-
-        $statement->execute($model->getId());
+        $statement->execute($model->getProductId());
+        //$statement->execute($model->getId());
     }
    
 }
