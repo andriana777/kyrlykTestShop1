@@ -176,8 +176,10 @@ class ProductController extends Controller
         $id = filter_input(INPUT_GET, 'id');
         if (isset($id) && isset($_POST['submit'])) {
             $this->set('deleted', 1);
+            $db= new DB();
+            $db->deleteEntity();
            // $model->deleteItem();
-            $model->deleteItem($this->id);
+            //$model->deleteItem($this->id);
            self::redirect('/product/list');
         }
         

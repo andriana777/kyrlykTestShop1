@@ -67,7 +67,24 @@ class CustomerController extends Controller {
         $this->redirect('/index/index');
     }
 
-// ...
+  public function registerAction()
+    {
+
+        $model = $this->getModel('Customer');
+        $this->set("title", "Реєстрація користувача");
+        if ($values = $model->getPostValues()) {
+           // $values  = $model->myValidator($values);
+          //  $model->addUser($values);
+             $model->addItem($values);
+            
+            
+          //$road= "/product/list";
+          $road = "/customer/registerOk";
+            self::redirect($road);
+        }
+        $this->renderLayout();
+    }
+
     
 }
 
