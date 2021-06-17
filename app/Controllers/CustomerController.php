@@ -73,14 +73,14 @@ class CustomerController extends Controller {
         $model = $this->getModel('Customer');
         $this->set("title", "Реєстрація користувача");
         if ($values = $model->getPostValues()) {
-           // $values  = $model->myValidator($values);
+           $values  = $model->regValidator($values);
           //$model->addUser($values);
             $model->addItem($values);
             
             
           //$road= "/product/list";
           $road = "/customer/registerOk";
-            self::redirect($road);
+          // self::redirect($road);
         }
         $this->renderLayout();
     }

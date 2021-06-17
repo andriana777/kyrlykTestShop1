@@ -30,7 +30,8 @@ class Model implements DbModelInterface
      * @var array
      */
     protected $params = [];
-
+    
+    
     /**
      * @return $this
      */
@@ -311,20 +312,35 @@ class Model implements DbModelInterface
 }
 
 public function regValidator($values) {
+    $values['password1'] = filter_input(INPUT_POST, 'password1');
     foreach ($values as $k=>$v) {
         if (!empty($v)){
             trim($v);
-            if(($k)==='email') {
-                FILTER_VALIDATE_EMAIL($v);
-            } else {
-                echo "Даний емейл не є валідним";
-            }
-        if ($k==='password' OR $k==="password1") {
-            
-        } 
+            $v = filter_var($v, FILTER_SANITIZE_SPECIAL_CHARS);
         } else {
             echo "Заповніть усі поля, будь-ласка";
+            exit();
         }
     }
+            if (!filter_var($values['email'], FILTER_VALIDATE_EMAIL)) {
+              echo "Даний емейл не є валідним";
+              exit();
+            }
+        if ($values['password'] === $values['password1']) {
+           
+            if (!preg_match('#^[a-zA-Z0-9]{8,}$#', $values['password'])) {
+                echo "Даний пароль не може бути встановлено. "
+                . "Пароль повинен містити лише латинські букви та цифри і мати не менше 8 знаків";
+                exit();
+              //  echo "Даний пароль не може бути встановлено";
+            }   
+        }else{
+            echo "Паролі не співпадають";
+            exit();
+       // } else {
+           // echo "Заповніть усі поля, будь-ласка";
+         
+    } unset($values['password1']);
+       return $values;
 }
 }

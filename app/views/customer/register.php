@@ -12,7 +12,9 @@
        <div><input type="text" name="city"></div><br>
     <h5>Пароль</h5>
        <div><input type="password" name="password"></div><br>
-   
+     <h5>Підтвердження пароля</h5>
+       <div><input type="password" name="password1"></div><br>
+       
       
     <input type="submit" name="submit" value="Зареєструватись">
     
