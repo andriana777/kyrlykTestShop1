@@ -238,17 +238,17 @@ class Model implements DbModelInterface
           
     }
     
-    public function deleteItem($id)
-            
-    {
-        $db = new DB;
-       //if(isset($_POST['submit'])){
-        $db->deleteEntity('product');
-      // return $this;
-      
-   // }
     
-    }
+    public function deleteItem($id)
+	{       
+                $db = new DB();
+               $ident = filter_input(INPUT_GET, 'id');
+		$sql = "DELETE FROM $this->table_name WHERE id = $ident";
+		
+		return $db->query($sql,$params);
+	}
+
+    
     
     public function myValidator($values)
     {
@@ -288,4 +288,43 @@ class Model implements DbModelInterface
         return filter_input(INPUT_GET, 'id');
     }
     
+    public function addUser($values)
+    {
+        $db = new DB;
+        $cols = '';
+        $val = '';
+        //$values = $this->myValidator($values);
+        foreach ($values as $k=>$v) {
+            
+            $cols .= "$k, ";
+            $val .= "'$v', ";
+        }
+            $cols = rtrim($cols, ", ");
+            $val = rtrim($val, ", ");
+     
+          $sql = "INSERT INTO $this->table_name ($cols) VALUES ($val)";
+         
+       $db->query($sql);
+     //return $lastId= $pdo::lastInsertId();
+       //$db->lastInsertId();
+    
+}
+
+public function regValidator($values) {
+    foreach ($values as $k=>$v) {
+        if (!empty($v)){
+            trim($v);
+            if(($k)==='email') {
+                FILTER_VALIDATE_EMAIL($v);
+            } else {
+                echo "Даний емейл не є валідним";
+            }
+        if ($k==='password' OR $k==="password1") {
+            
+        } 
+        } else {
+            echo "Заповніть усі поля, будь-ласка";
+        }
+    }
+}
 }
