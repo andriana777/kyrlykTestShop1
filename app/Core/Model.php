@@ -294,7 +294,7 @@ class Model implements DbModelInterface
         $db = new DB;
         $cols = '';
         $val = '';
-        //$values = $this->myValidator($values);
+        
         foreach ($values as $k=>$v) {
             
             $cols .= "$k, ";
@@ -306,9 +306,7 @@ class Model implements DbModelInterface
           $sql = "INSERT INTO $this->table_name ($cols) VALUES ($val)";
          
        $db->query($sql);
-     //return $lastId= $pdo::lastInsertId();
-       //$db->lastInsertId();
-    
+     
 }
 
 public function regValidator($values) {

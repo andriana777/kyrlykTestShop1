@@ -95,7 +95,7 @@ class ProductController extends Controller
     /**
      * @return array
      */
-    public function getSortParams()
+  /*  public function getSortParams()
     {
         $params = [];
         $sortfirst = filter_input(INPUT_POST, 'sortfirst');
@@ -114,10 +114,46 @@ class ProductController extends Controller
         return $params;
 
     }
-
+*/
     /**
      * @return array
      */
+    //Using Cookie
+      public function getSortParams()
+    {
+        $params = [];
+        $sortfirst = filter_input(INPUT_POST, 'sortfirst');
+        if (isset($sortfirst) && empty($_COOKIE['sortCookie1'])) {
+            setcookie('sortCookie1', $sortfirst);
+        }
+         if (!empty($_COOKIE['sortCookie1'])) {
+            $sortfirst = $_COOKIE['sortCookie1'];
+        }
+        
+        if ($sortfirst === "price_DESC") {
+            $params['price'] = 'DESC';
+        } else {
+            $params['price'] = 'ASC';
+        }
+        $sortsecond = filter_input(INPUT_POST, 'sortsecond');
+         if (isset($sortsecond) && empty($_COOKIE['sortCookie2'])) {
+            setcookie('sortCookie2', $sortsecond);
+        }
+          if (!empty($_COOKIE['sortCookie2'])) {
+            $sortsecond = $_COOKIE['sortCookie2'];
+        }
+        if ($sortsecond === "qty_DESC") {
+            $params['qty'] = 'DESC';
+        } else {
+            $params['qty'] = 'ASC';
+        }
+        
+      
+        return $params;
+
+    }
+
+    
     public function getSortParams_old()
     {
         /*
