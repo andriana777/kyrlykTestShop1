@@ -3,6 +3,7 @@
 }
 
 .product {
+    border-radius: 5px;
     border: dotted 1px gray;
     margin:20px;
     padding: 20px;
@@ -11,4 +12,17 @@
 .price {
     color: red;
     font-size: 22px;
+}
+
+button {
+     border: dotted 1px gray;
+     border-radius: 5px;
+     color: red;
+     font-size: 22px;
+     
+}
+
+.add {
+    
+   
 }

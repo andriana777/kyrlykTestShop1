@@ -148,7 +148,19 @@ class ProductController extends Controller
             $params['qty'] = 'ASC';
         }
         
+      if (!empty($_COOKIE['sortCookie1']) && isset($_POST['sortfirst']) && 
+              $_COOKIE['sortCookie1']!==$_POST['sortfirst']) {
+         // setcookie('sortCookie1', '');
+          setcookie('sortCookie1', $_POST['sortfirst']);
+      }
+      $sortfirst = $_COOKIE['sortCookie1'];
       
+       if (!empty($_COOKIE['sortCookie2']) && isset($_POST['sortsecond']) && 
+              $_COOKIE['sortCookie2']!==$_POST['sortsecond']) {
+         // setcookie('sortCookie1', '');
+          setcookie('sortCookie2', $_POST['sortsecond']);
+      }
+      $sortsecond = $_COOKIE['sortCookie2'];
         return $params;
 
     }
@@ -227,5 +239,41 @@ class ProductController extends Controller
          $db= new DB();
          $this->last= $db->lastInsertId();
          return $this;
+    }
+    
+    public function unloadAction()
+    {
+        $products = $this->getModel('Product')
+            ->initCollection()
+            ->getCollection()->select();
+        $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8" ?><products/>');
+
+        foreach ($products as $product) {
+            $xmlProduct = $xml->addChild('product');
+            $xmlProduct->addChild('id',$product['id']);
+            $xmlProduct->addChild('sku',$product['sku']);
+            $xmlProduct->addChild('name',$product['name']);
+            $xmlProduct->addChild('price',$product['price']);
+            $xmlProduct->addChild('qty',$product['qty']);
+            $xmlProduct->addChild('description',$product['description']);
+        }
+        //$xml->asXML('public/products.xml');
+        //echo Helper::redirectDownload('/public/products.xml');
+
+        $dom = new DOMDocument("1.0");
+        $dom->preserveWhiteSpace = false;
+        $dom->formatOutput = true;
+        $dom->loadXML($xml->asXML());
+        $dom->saveXML();
+
+        $file = fopen('public/products.xml','w');
+        fwrite($file, $dom->saveXML());
+        fclose($file);
+        
+    
+        $this->setView();
+        $this->renderLayout();
+       
+ 
     }
 }

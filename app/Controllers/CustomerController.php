@@ -74,7 +74,6 @@ class CustomerController extends Controller {
         $this->set("title", "Реєстрація користувача");
         if ($values = $model->getPostValues()) {
            $values  = $model->regValidator($values);
-          //$model->addUser($values);
             $model->addItem($values);
             
             
