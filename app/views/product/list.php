@@ -9,15 +9,20 @@
 </select>
     <div class="filterPrice" style="float: right">
 Ціна від:<input style=" border-radius: 5px;" type="text" name="from" value="<?= filter_input(INPUT_POST, 'from')?>">
-Ціна до:<input style=" border-radius: 5px;" type="text" name="to" value="<?= filter_input(INPUT_POST, 'to')?>"><br>
-<input  type="submit" value="Застосувати" style="margin-left: 170px; margin-top: 10px; width: 200px; background-color: Silver; height: 30px; border-radius: 5px; color: whitesmoke"></div>
+Ціна до:<input style=" border-radius: 5px;" type="text" name="to" value="<?= filter_input(INPUT_POST, 'to')?>"><br></div>
+<input  type="submit" value="Застосувати" style="margin-left: 450px; margin-top: 10px; width: 200px; background-color: Silver; height: 30px; border-radius: 5px; color: whitesmoke">
 </form>
-
+<div>
 <?php if (\Core\Helper::isAdmin()===true) { ?>
-<div class="add" style="margin-left: 200px; margin-top: 60px;"><button style="width: 200px;  background-color: Silver; height: 30px; border-radius: 5px; color: whitesmoke">
+<div class="add" style="margin-left: 450px; margin-top: 60px;"><button style="width: 200px;  background-color: Silver; height: 30px; border-radius: 5px; color: whitesmoke">
         <?= \Core\Url::getLink('/product/add', 'Додати товар'); ?>
 </button></div>
 <?php }; ?>
+<?php if (\Core\Helper::isAdmin()===true) { ?>
+<div class="add" style="margin-left: 450px; margin-top: 30px;"><button style="width: 200px;  background-color: Silver; height: 30px; border-radius: 5px; color: whitesmoke">
+        <?= \Core\Url::getLink('/product/unload', 'Експорт в XML'); ?>
+</button></div>
+    <?php }; ?></div>
 <?php
 
 $products =  $this->get('products');

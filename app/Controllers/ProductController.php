@@ -4,6 +4,8 @@ namespace Controllers;
 use Core\Controller;
 use Core\View;
 use Core\DB;
+use SimpleXMLElement;
+use DOMDocument;
 
 /**
  * Class ProductController
@@ -266,12 +268,13 @@ class ProductController extends Controller
         $dom->loadXML($xml->asXML());
         $dom->saveXML();
 
-        $file = fopen('public/products.xml','w');
+       // $file = fopen('public/products.xml','w');
+        $file = fopen('app/products.xml','w');
         fwrite($file, $dom->saveXML());
         fclose($file);
         
     
-        $this->setView();
+        //$this->setView();
         $this->renderLayout();
        
  
