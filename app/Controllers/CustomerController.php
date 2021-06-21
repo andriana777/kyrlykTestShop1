@@ -23,7 +23,7 @@ class CustomerController extends Controller {
             $password = (filter_input(INPUT_POST, 'password'));
             $params =array (
                 'email' => $email,
-                'password' => $password
+                'password' => md5($password)
             );
            // $_SESSION =[];
             $customer = $this->getModel('customer')->initCollection()
@@ -75,7 +75,6 @@ class CustomerController extends Controller {
         if ($values = $model->getPostValues()) {
            $values  = $model->regValidator($values);
             $model->addItem($values);
-            
             
           //$road= "/product/list";
           $road = "/customer/registerOk";

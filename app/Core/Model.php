@@ -335,10 +335,9 @@ public function regValidator($values) {
         }else{
             echo "Паролі не співпадають";
             exit();
-       // } else {
-           // echo "Заповніть усі поля, будь-ласка";
-         
-    } unset($values['password1']);
+    } 
+    $values['password'] = md5($values['password']);
+    unset($values['password1']);
        return $values;
 }
 }

@@ -14,7 +14,7 @@
 </form>
 
 <?php if (\Core\Helper::isAdmin()===true) { ?>
-<div class="add" style="margin-left: 300px; margin-top: 40px;"><button style="width: 200px;  background-color: Silver; height: 30px; border-radius: 5px; color: whitesmoke">
+<div class="add" style="margin-left: 200px; margin-top: 60px;"><button style="width: 200px;  background-color: Silver; height: 30px; border-radius: 5px; color: whitesmoke">
         <?= \Core\Url::getLink('/product/add', 'Додати товар'); ?>
 </button></div>
 <?php }; ?>
