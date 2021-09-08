@@ -246,7 +246,7 @@ class Model implements DbModelInterface
                $ident = filter_input(INPUT_GET, 'id');
 		$sql = "DELETE FROM $this->table_name WHERE id = $ident";
 		
-		return $db->query($sql,$params);
+		return $db->query($sql);
 	}
 
     
